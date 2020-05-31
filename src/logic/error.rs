@@ -12,9 +12,9 @@ pub(crate) enum AppError {
     #[error(
         "Vn executable not found: {0}. Please provide full path to executable."
     )]
-    VnExecutableNotFound(PathBuf),
+    ExecutableNotFound(PathBuf),
     #[error("Could not start Vn")]
-    VnPlayError,
+    PlayError,
     #[error("File is not valid executable. {0}")]
-    VnExecutableInvalid(String),
+    ExecutableInvalid(String),
 }

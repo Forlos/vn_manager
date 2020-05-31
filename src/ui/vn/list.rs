@@ -70,7 +70,7 @@ impl VnList {
             vn.set_executable_path(match canonicalize(&path) {
                 Ok(p) => p,
                 Err(_err) => {
-                    return Err(AppError::VnExecutableNotFound(path).into())
+                    return Err(AppError::ExecutableNotFound(path).into())
                 }
             });
         }

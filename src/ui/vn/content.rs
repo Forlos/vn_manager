@@ -3,8 +3,8 @@ use crate::{
     message::Message,
     ui::vn::{list::VnList, view::VnView},
 };
-use anyhow::{Context, Result};
 
+use anyhow::Result;
 use iced::{Container, Element, Length, Row};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -49,7 +49,10 @@ impl VnContent {
     }
     pub(crate) fn delete_vn(&mut self, vn_id: usize) -> Result<()> {
         self.list.delete_vn(vn_id);
-        self.update_view(self.list.list.first().context("asdf")?.vn.clone());
+        match self.list.list.first() {
+            Some(vn) => self.view = VnView::from(vn.vn.clone()),
+            None => self.view = super::view::VnView::init(),
+        };
         save_state_to_file(&get_app_state_path()?, &self)
     }
     pub(crate) fn vn_exists(&self, vn_id: usize) -> bool {

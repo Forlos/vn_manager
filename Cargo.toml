@@ -5,7 +5,7 @@ authors = ["forlos <forlos@disroot.org>"]
 edition = "2018"
 
 [dependencies]
-iced = { version = "0.1.1", default_features = false, features = ["image"] }
+iced = { version = "0.1.1", features = ["image"] }
 strum = "0.18.0"
 strum_macros = "0.18.0"
 vndb_rs = { git = "https://github.com/Forlos/vndb_rs", branch = "master" }
