@@ -33,7 +33,7 @@ pub(crate) fn play_vn(path: &PathBuf) -> Result<()> {
         .spawn()
     {
         Ok(_) => Ok(()),
-        Err(_) => Err(AppError::VnPlayError.into()),
+        Err(_) => Err(AppError::PlayError.into()),
     }
 }
 
