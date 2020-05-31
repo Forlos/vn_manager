@@ -34,7 +34,7 @@ impl TryFrom<GetVnResults> for Vn {
 
         path.push(
             image_url
-                .rsplitn(2, "/")
+                .rsplitn(2, '/')
                 .next()
                 .context("Could not get image path")?,
         );
