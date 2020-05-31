@@ -8,7 +8,7 @@ edition = "2018"
 iced = { version = "0.1.1", default_features = false, features = ["image"] }
 strum = "0.18.0"
 strum_macros = "0.18.0"
-vndb_rs = { path = "../vndb_rs" }
+vndb_rs = { git = "https://github.com/Forlos/vndb_rs", branch = "master" }
 reqwest = { version = "0.10", features = ["blocking"] }
 serde = { version = "1.0.106", default_features = false, features = ["derive"] }
 serde_json = "1.0"

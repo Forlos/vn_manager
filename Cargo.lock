@@ -2747,6 +2747,7 @@ dependencies = [
 [[package]]
 name = "vndb_rs"
 version = "0.1.1"
+source = "git+https://github.com/Forlos/vndb_rs#a6ede62f60b6a5386bd327d5063f8fe974d8101d"
 dependencies = [
  "log",
  "serde",
