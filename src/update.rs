@@ -89,7 +89,6 @@ pub(crate) fn handle_message(
             Content::AddVn(ref mut content) => {
                 content.set_error_msg(msg);
             }
-            Content::NoContent => {}
         },
         Message::Empty(_) => (),
         Message::DeleteVn(vn_id) => {

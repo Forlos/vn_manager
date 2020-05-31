@@ -59,5 +59,4 @@ impl Header {
 pub(crate) enum Category {
     Vns,
     AddVn,
-    NoCategory,
 }
