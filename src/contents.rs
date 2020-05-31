@@ -5,6 +5,7 @@ use crate::{
         vn::content::VnContent,
     },
 };
+use anyhow::{Context, Result};
 
 pub(crate) struct Contents {
     pub content_list: [Content; 2],
@@ -13,10 +14,11 @@ pub(crate) struct Contents {
 
 impl Contents {
     pub(crate) fn init() -> Self {
-        let path = get_app_state_path().unwrap();
+        let path = get_app_state_path().expect("Could not get app path");
 
         let vn_content: VnContent = match std::fs::File::open(&path) {
-            Ok(f) => serde_json::from_reader(f).unwrap(),
+            Ok(f) => serde_json::from_reader(f)
+                .expect("Could not read app state from file"),
             Err(_) => VnContent::init(),
         };
 
@@ -29,24 +31,33 @@ impl Contents {
             current_content_index: 0,
         }
     }
-    pub(crate) fn get_current_content(&mut self) -> &mut Content {
-        self.content_list
+    pub(crate) fn get_current_content(&mut self) -> Result<&mut Content> {
+        Ok(self
+            .content_list
             .get_mut(self.current_content_index)
-            .unwrap()
+            .context("Could not get currently displayed content")?)
     }
-    pub(crate) fn set_current_content(&mut self, category: Category) {
+    pub(crate) fn set_current_content(
+        &mut self,
+        category: Category,
+    ) -> Result<()> {
         self.current_content_index = self
             .content_list
             .iter()
             .enumerate()
             .find(|content| content.1.get_category() == category)
-            .expect("Category not found")
+            .context("Category not found")?
             .0;
+        Ok(())
     }
-    pub(crate) fn get_content(&mut self, category: Category) -> &mut Content {
-        self.content_list
+    pub(crate) fn get_content(
+        &mut self,
+        category: Category,
+    ) -> Result<&mut Content> {
+        Ok(self
+            .content_list
             .iter_mut()
             .find(|content| content.get_category() == category)
-            .expect("Category not found")
+            .context("Category not found")?)
     }
 }

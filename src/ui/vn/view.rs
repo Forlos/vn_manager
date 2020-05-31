@@ -65,6 +65,7 @@ impl VnView {
                 } else {
                     Text::new("")
                 })
+                // TODO change to flags instead of text
                 .push(vn.languages.iter().fold(
                     Row::new().spacing(10).push(Text::new("Languages: ")),
                     |row, lang| row.push(Text::new(lang)),
@@ -75,7 +76,9 @@ impl VnView {
                         .push(
                             Column::new()
                                 .push(Image::new(image::Handle::from_path(
-                                    vn.image_path.clone().unwrap(),
+                                    vn.image_path
+                                        .clone()
+                                        .expect("Could not load image"),
                                 )))
                                 .push(
                                     Row::new()

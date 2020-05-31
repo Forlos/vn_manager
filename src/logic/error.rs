@@ -15,11 +15,6 @@ pub(crate) enum AppError {
     VnExecutableNotFound(PathBuf),
     #[error("Could not start Vn")]
     VnPlayError,
-    #[error("File is not valid executable")]
-    VnExecutableInvalid,
-}
-
-pub(crate) trait ErrorView {
-    type View;
-    fn set_error_msg(view: &mut Self::View, error_msg: String);
+    #[error("File is not valid executable. {0}")]
+    VnExecutableInvalid(String),
 }

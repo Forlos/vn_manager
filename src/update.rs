@@ -16,17 +16,17 @@ pub(crate) fn handle_message(
     match message {
         Message::Vn(vn) => {
             if let Content::Vn(ref mut vn_content) =
-                app.contents.get_current_content()
+                app.contents.get_current_content()?
             {
                 vn_content.update_view(vn);
             }
         }
         Message::Header(category) => {
-            app.contents.set_current_content(category);
+            app.contents.set_current_content(category)?;
         }
         Message::AddVnInputChanged(input, add_vn_input) => {
             if let Content::AddVn(add_vn_content) =
-                app.contents.get_current_content()
+                app.contents.get_current_content()?
             {
                 match add_vn_input {
                     AddVnInput::VnName => add_vn_content.set_vn_id(input),
@@ -38,12 +38,12 @@ pub(crate) fn handle_message(
         }
         Message::AddVn(vn_id, executable_path) => {
             if let Content::AddVn(ref mut content) =
-                app.contents.get_content(Category::AddVn)
+                app.contents.get_content(Category::AddVn)?
             {
                 content.clear_msg();
             }
             if let Content::Vn(ref mut vn_content) =
-                app.contents.get_content(Category::Vns)
+                app.contents.get_content(Category::Vns)?
             {
                 let id = match vn_id.parse() {
                     Ok(i) => i,
@@ -60,7 +60,7 @@ pub(crate) fn handle_message(
                     Ok(response) => {
                         vn_content.add_vn(response, executable_path)?;
                         if let Content::AddVn(ref mut content) =
-                            app.contents.get_content(Category::AddVn)
+                            app.contents.get_content(Category::AddVn)?
                         {
                             content.set_success_msg(
                                 "Vn added successfully".into(),
@@ -84,7 +84,7 @@ pub(crate) fn handle_message(
         Message::PlayVn(path) => {
             play_vn(&path)?;
         }
-        Message::Error(msg) => match app.contents.get_current_content() {
+        Message::Error(msg) => match app.contents.get_current_content()? {
             Content::Vn(ref mut content) => content.set_error_msg(msg),
             Content::AddVn(ref mut content) => {
                 content.set_error_msg(msg);
@@ -94,7 +94,7 @@ pub(crate) fn handle_message(
         Message::Empty(_) => (),
         Message::DeleteVn(vn_id) => {
             if let Content::Vn(ref mut content) =
-                app.contents.get_current_content()
+                app.contents.get_current_content()?
             {
                 log::info!("Vn deleted: {}", vn_id);
                 content.delete_vn(vn_id)?;

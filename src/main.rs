@@ -15,8 +15,8 @@ pub fn main() {
         .filter_module("winit", log::LevelFilter::Warn)
         .filter_module("iced_winit", log::LevelFilter::Warn)
         .filter_module("wgpu_native", log::LevelFilter::Warn)
-        .filter_module("vndb_rs", log::LevelFilter::Debug)
-        .filter(None, log::LevelFilter::Info)
+        .filter_module("vndb_rs", log::LevelFilter::Warn)
+        .filter(None, log::LevelFilter::Warn)
         .init();
     App::run(Settings {
         // TODO this is workaround until iced supports fallback fonts

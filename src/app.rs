@@ -50,10 +50,13 @@ impl Application for App {
         }
     }
 
-    fn view(&mut self) -> Element<Self::Message> {
-        let content = Column::new()
-            .push(self.header.view())
-            .push(self.contents.get_current_content().view());
+    fn view(&mut self) -> Element<Message> {
+        let content = Column::new().push(self.header.view()).push(
+            self.contents
+                .get_current_content()
+                .expect("Could not get currently displayed content")
+                .view(),
+        );
 
         Container::new(content)
             .width(Length::Fill)
@@ -62,7 +65,7 @@ impl Application for App {
             .center_y()
             .into()
     }
-    fn subscription(&self) -> iced::Subscription<Self::Message> {
+    fn subscription(&self) -> iced::Subscription<Message> {
         iced::Subscription::none()
     }
 }

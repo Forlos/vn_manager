@@ -41,10 +41,18 @@ pub(crate) fn play_vn(path: &PathBuf) -> Result<()> {
 pub(crate) fn check_executable(path: &PathBuf) -> Result<()> {
     if let Some(ext) = path.extension() {
         if !VALID_EXECUTABLES.iter().any(|valid| valid == &ext) {
-            return Err(AppError::VnExecutableInvalid.into());
+            return Err(AppError::VnExecutableInvalid(format!(
+                "Expected one of: {:?}",
+                VALID_EXECUTABLES
+            ))
+            .into());
         }
     } else {
-        return Err(AppError::VnExecutableInvalid.into());
+        return Err(AppError::VnExecutableInvalid(format!(
+            "Expected one of: {:?}",
+            VALID_EXECUTABLES
+        ))
+        .into());
     };
     Ok(())
 }
