@@ -1,9 +1,10 @@
 #+author: Forlos
 
-* vn manager
+* Visual novel manager
 
-Cross-platform visual novel manager
-Highly experimental expect crashes and missing features
+Cross-platform visual novel manager.
+
+Highly experimental expect crashes and missing features.
 
 [[./media/preview.png]]
 
