@@ -1,1 +1,22 @@
-WIP
+#+author: Forlos
+
+* Visual novel manager
+
+Cross-platform visual novel manager.
+
+Highly experimental expect crashes and missing features.
+
+[[./media/preview.png]]
+
+[[./media/preview2.png]]
+
+** Features
+- Add vn and get info from vndb
+
+** Install
+*** Binaries
+See [[https://github.com/Forlos/vn_manager/releases][releases]] tab
+*** From source
+#+BEGIN_SRC bash
+cargo install --git https://github.com/Forlos/vn_manager --branch master
+#+END_SRC
